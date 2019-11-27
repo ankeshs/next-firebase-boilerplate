@@ -1,0 +1,11 @@
+build
+dist
+log
+# Firebase cache
+.firebase/
+node_modules
+firebase-debug.log
+# Cruft
+.DS_Store
+npm-debug.log
+.idea

@@ -1,0 +1,53 @@
+{
+  "name": "hello-next",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "engines": {
+    "node": "8"
+  },
+  "scripts": {
+    "dev": "rimraf \"dist\" && npx node src/server/index.js",
+    "start": "cross-env NODE_ENV=production node dist/functions/server/index.js",
+    "preserve": "npm run build:firebase && npm run install-deps",
+    "serve": "cross-env NODE_ENV=production firebase serve",
+    "predeploy": "npm run build:firebase",
+    "deploy": "cross-env NODE_ENV=production firebase deploy",
+    "build": "rimraf \"dist\" && yarn build:next && yarn build:server",
+    "build:prod": "yarn build && cpx \"src/static/**/*.*\" \"dist/functions/static\" -C",
+    "build:next": "next build \"src/app\"",
+    "build:server": "cross-env NODE_ENV=production babel \"src/server\" --out-dir \"dist/functions/server\"",
+    "build:func": "cross-env NODE_ENV=production babel \"src/cloud.js\"  --presets=env,es2015 --out-file \"dist/functions/index.js\"",
+    "build:public": "cpx \"src/static/**/*.*\" \"dist/public/static\" -C",
+    "build:firebase": "npm run build && npm run build:func && npm run build:public && npm run copy-deps",
+    "copy-deps": "cpx \"*{package.json,package-lock.json,yarn.lock}\" \"dist/functions\" -C",
+    "install-deps": "cd \"dist/functions\" && npm i"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "babel-register": "^6.26.0",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "firebase-admin": "^8.8.0",
+    "firebase-functions": "^3.3.0",
+    "next": "^9.0.0",
+    "path": "^0.12.7",
+    "react": "^16.8.4",
+    "react-dom": "^16.8.4"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-1": "^6.24.1",
+    "babel-runtime": "^6.26.0",
+    "cpx": "^1.5.0",
+    "cross-env": "^5.2.0",
+    "es6-promise": "^4.2.8",
+    "rimraf": "^3.0.0"
+  }
+}
