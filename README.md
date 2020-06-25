@@ -1,6 +1,6 @@
 # NextJS - Firebase - Express Boilerplate
 
-A fully functional boilerplate with NextJS / React that can be deployed on Firebase Cloud functions + Firebase hosting setup. Supports NextJS service sender render, API only routes using express and static file serving.
+A fully functional boilerplate with NextJS / React that can be deployed on Firebase Cloud functions + Firebase hosting setup. Supports NextJS service render, API only routes using express and static file serving.
 
 The project has 3 parts:
 - NextJS app: *src/app*
